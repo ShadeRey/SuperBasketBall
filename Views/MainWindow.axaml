@@ -1,0 +1,40 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:SuperBasketBall.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:SukiUI.Controls;assembly=SukiUI"
+        xmlns:views="clr-namespace:SuperBasketBall.Views"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="SuperBasketBall.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/1.png"
+        Title="SuperBasketBall">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+
+    <controls:SukiHost>
+        <StackPanel>
+            <StackPanel x:Name="RoleStackPanel"
+                        IsVisible="{Binding RoleStackPanelIsVisible}"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <Button Content="Войти как администатор"
+                        Command="{Binding AdministratorView}" />
+                <Button Content="Войти как менеджер"
+                        Command="{Binding ManagerView}" />
+            </StackPanel>
+            <Grid>
+                <views:AdministratorView Name="AdministratorView"
+                                         DataContext="{Binding AdministratorViewModel}"
+                                         IsVisible="{Binding AdministratorViewVisible}" />
+                <views:ManagerView Name="AuthorizedCustomerView"
+                                   DataContext="{Binding ManagerViewModel}"
+                                   IsVisible="{Binding ManagerViewVisible}" />
+            </Grid>
+        </StackPanel>
+    </controls:SukiHost>
+
+</Window>

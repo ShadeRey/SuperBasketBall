@@ -1,0 +1,95 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:SuperBasketBall.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="SuperBasketBall.Views.AdministratorView"
+             x:DataType="viewModels:AdministratorViewModel">
+    <Design.DataContext>
+        <viewModels:AdministratorViewModel />
+    </Design.DataContext>
+
+    <DockPanel
+        HorizontalAlignment="Stretch"
+        LastChildFill="True">
+        <StackPanel>
+            <Border
+                Width="400"
+                Margin="0 0 0 20"
+                CornerRadius="10">
+                <StackPanel
+                    DockPanel.Dock="Top"
+                    HorizontalAlignment="Left"
+                    Orientation="Horizontal">
+                    <TextBox
+                        Name="PlayerSearch"
+                        Watermark="Поиск"
+                        MinWidth="150"
+                        TextChanged="PlayerSearch_OnTextChanged" />
+                    <ComboBox
+                        Width="180"
+                        Name="PlayerFilter"
+                        PlaceholderText="Фильтровать по..."
+                        SelectionChanged="PlayerFilter_OnSelectionChanged">
+                        <ComboBoxItem>
+                            <TextBlock>Все позиции</TextBlock>
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            <TextBlock>Нападающий</TextBlock>
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            <TextBlock>Защитник</TextBlock>
+                        </ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+            </Border>
+            <Panel>
+                <Border
+                    CornerRadius="10"
+                    Width="950"
+                    Height="800">
+                    <DataGrid Name="PlayerGrid"
+                              Width="950"
+                              IsReadOnly="True"
+                              ItemsSource="{Binding Player}"
+                              SelectedItem="{Binding PlayerSelectedItem}">
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Изменить"
+                                          Name="PlayerEdit"
+                                          Command="{Binding EditPlayerInDB}" />
+                                <MenuItem Header="Удалить"
+                                          Name="PlayerDelete"
+                                          Command="{Binding DeletePlayerFromDB}" />
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="*"
+                                                Header="Фамилия игрока"
+                                                Binding="{Binding PlayerSurname}" />
+                            <DataGridTextColumn Width="*"
+                                                Header="Позиция"
+                                                Binding="{Binding PositionName}" />
+                            <DataGridTextColumn Width="*"
+                                                Header="Вес"
+                                                Binding="{Binding Weight}" />
+                            <DataGridTextColumn Width="*"
+                                                Header="Рост"
+                                                Binding="{Binding Height}" />
+                            <DataGridTextColumn Width="*"
+                                                Header="День рождения"
+                                                Binding="{Binding BirthDate, StringFormat=yyyy-MM-dd}"/>
+                            <DataGridTextColumn Width="*"
+                                                Header="Дата начала игры"
+                                                Binding="{Binding StartGameDate, StringFormat=yyyy-MM-dd}"/>
+                            <DataGridTextColumn Width="*"
+                                                Header="Команда"
+                                                Binding="{Binding TeamName}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+            </Panel>
+        </StackPanel>
+    </DockPanel>
+</UserControl>

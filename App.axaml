@@ -1,0 +1,15 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="SuperBasketBall.App"
+             xmlns:local="using:SuperBasketBall"
+             xmlns:sukiUi="clr-namespace:SukiUI;assembly=SukiUI"
+             RequestedThemeVariant="Default">
+
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
+  
+    <Application.Styles>
+        <sukiUi:SukiTheme ThemeColor="Blue"  />
+    </Application.Styles>
+</Application>
